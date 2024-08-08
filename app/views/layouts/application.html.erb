@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <!-- ... otras etiquetas ... -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MembersOnly</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <!-- Optional: Add a favicon -->
+    <link rel="icon" href="https://c3.klipartz.com/pngpicture/138/743/sticker-png-esfera-del-dragon-5-estrellas.png">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <% if signed_in? %>
+            <li><%= link_to "Profile", edit_user_registration_path %></li>
+            <li><%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %></li>
+          <% else %>
+            <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <li><%= link_to "Login", new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="notifications">
+        <% if notice.present? %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+        <% if alert.present? %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
+      </div>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <p><%= Time.current.year %> MembersOnly. All rights reserved.</p>
+    </footer>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 1rem;
+      }
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+      }
+      nav ul li {
+        margin: 0 1rem;
+      }
+      nav ul li a {
+        color: #fff;
+        text-decoration: none;
+      }
+      .notifications {
+        padding: 1rem;
+        background-color: #f8f9fa;
+      }
+      .notice {
+        color: green;
+      }
+      .alert {
+        color: red;
+      }
+      main {
+        padding: 2rem;
+      }
+      footer {
+        background-color: #343a40;
+        color: #ffffff;
+        text-align: center;
+        padding: 1rem;
+        position: fixed;
+        bottom: 0;
+        width: 100%
+      }
+    </style>
+  </body>
+</html>

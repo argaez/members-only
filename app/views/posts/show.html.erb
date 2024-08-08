@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @post.title %></title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background-color: #ffffff;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-title {
+      font-size: 2rem;
+      color: #343a40;
+      margin-bottom: 1rem;
+    }
+
+    .post-body {
+      font-size: 1rem;
+      color: #495057;
+      margin-bottom: 1.5rem;
+    }
+
+    .post-author {
+      font-size: 0.875rem;
+      color: #6c757d;
+    }
+
+    .post-actions {
+      margin-top: 1.5rem;
+    }
+
+    .action-list {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .action-list li {
+      display: inline;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-edit {
+      background-color: #ffc107;
+      color: #fff;
+      border-color: #ffc107;
+    }
+
+    .btn-edit:hover {
+      background-color: #e0a800;
+      border-color: #d39e00;
+    }
+
+    .btn-delete {
+      background-color: #dc3545;
+      color: #fff;
+      border-color: #dc3545;
+    }
+
+    .btn-delete:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+
+    .btn-view-all {
+      background-color: #007bff;
+      color: #fff;
+      border-color: #007bff;
+    }
+
+    .btn-view-all:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="post-title"><%= @post.title %></h1>
+    <p class="post-body"><%= @post.body %></p>
+
+    <% if user_signed_in? %>
+      <p class="post-author"><strong>Author:</strong> <%= @post.user.email %></p>
+    <% end %>
+
+    <div class="post-actions">
+      <ul class="action-list">
+        <li>
+          <%= link_to "Edit", edit_post_path(@post), class: "btn btn-edit" %>
+        </li>
+        <li>
+          <%= link_to "Delete", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-delete" %>
+        </li>
+        <li>
+          <%= link_to "View all Posts", posts_path, class: "btn btn-view-all" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

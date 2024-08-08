@@ -1,0 +1,94 @@
+  <%= form_with model: post, local: true, class: "post-form" do |form| %>
+    <div class="form-group">
+      <%= form.label :title, class: "form-label" %>
+      <%= form.text_field :title, class: "form-control" %>
+      <% post.errors.full_messages_for(:title).each do |message| %>
+        <div class="error-message"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :body, class: "form-label" %>
+      <%= form.text_area :body, class: "form-control" %>
+      <% post.errors.full_messages_for(:body).each do |message| %>
+        <div class="error-message"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit "Submit", class: "btn btn-primary" %>
+      <%= link_to "View all Posts", posts_path, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+
+  <style>
+    .post-form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1rem;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      color: #fff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: #fff;
+      border-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+      border-color: #545b62;
+    }
+
+    .error-message {
+      color: #dc3545;
+      margin-top: 0.25rem;
+      font-size: 0.875rem;
+    }
+  </style>
